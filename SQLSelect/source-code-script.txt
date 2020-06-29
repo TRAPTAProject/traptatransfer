@@ -1,0 +1,44 @@
+IDFichier est un entier
+LigneLue est une chaîne
+NumConnexion est un entier
+SQLFichier est une chaîne
+WDDFichier est une chaîne
+IndexLigne est un entier
+
+WDDFichier = LigneCommande(1)
+SQLFichier = LigneCommande(2)
+
+
+SI WDDFichier = "" OU SQLFichier = "" ALORS
+	RENVOYER 100
+FIN
+
+
+IDFichier = fOuvre(SQLFichier)
+SI IDFichier = -1 ALORS
+	RENVOYER 101
+SINON
+	
+	NumConnexion = SQLConnecte(WDDFichier, "", "", "Hyper File")
+	SI NumConnexion <> 0 ALORS
+		LigneLue = fLitLigne(IDFichier)
+		IndexLigne = 0
+		TANTQUE LigneLue <> EOT ET LigneLue <> ""
+			SI SQLExec(LigneLue, "REQ") = Vrai ALORS
+				
+			SINON
+				RENVOYER 110+IndexLigne
+				
+			FIN
+			LigneLue = fLitLigne(IDFichier)	
+		FIN
+		
+		
+	SINON
+		
+		RENVOYER 102
+	FIN
+	
+	SQLDéconnecte()
+	RENVOYER 0
+FIN

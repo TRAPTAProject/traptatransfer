@@ -1,0 +1,46 @@
+
+NumConnexion est un entier
+SQLRequete est une chaîne
+WDDFichier est une chaîne
+NomFichier est une chaîne
+IdFichier est un entier
+ncolonnes est un entier
+maChaine est une chaîne
+
+WDDFichier = LigneCommande(1)
+SQLRequete = LigneCommande(2)
+NomFichier = LigneCommande(3)
+
+
+IdFichier = fCrée(NomFichier)
+SI IdFichier = -1 ALORS
+	RENVOYER 100
+FIN
+
+NumConnexion = SQLConnecte(WDDFichier, "", "", "Hyper File")
+SI NumConnexion <> 0 ALORS
+	SI SQLExec(SQLRequete, "REQ1") = Vrai ALORS
+		SQLInfoGene("REQ1")
+		ncolonnes = SQL.NbCol
+		TANTQUE SQLAvance("REQ1") = 0 
+			maChaine = ""
+			POUR Indice = 1 A ncolonnes
+				maChaine = maChaine + SQLLitCol("REQ1", Indice)+";"
+			FIN
+			fEcritLigne(IdFichier, maChaine)
+		FIN
+	SINON
+		Erreur(ErreurInfo(errMessage))
+		RENVOYER 102
+	FIN
+	
+	SQLFerme("REQ1")
+	
+	
+SINON
+	
+	RENVOYER 101
+FIN
+
+SQLDéconnecte()
+RENVOYER 0

@@ -1,0 +1,13 @@
+SQLScript <WDD File> <SQL File>
+
+WDD File is the db hyperfile description fil
+SQL File is a list of SQL query to execute (typically update/delete/create query). Separated by \n
+
+Exit code:
+
+100 : WDD File ou SQL File missing
+101 : Cannot open SQL File
+102 : Cannot open WDD File
+103 : Error while executiong query
+
+0: OK

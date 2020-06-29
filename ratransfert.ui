@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RATransfert</class>
+ <widget class="QWidget" name="RATransfert">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>473</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>RATransfert</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+	background:white;
+	color:black
+}
+
+QPushButton {
+	border: 1px solid black;
+	border-radius: 2;
+	padding: 5px 15px 5px 15px;
+
+}
+
+QPushButton:hover {
+	background:#9df;
+}
+
+QPushButton:pressed {
+	background:black;
+	color:white;
+	
+}
+
+QComboBox {
+	border: 1px solid black;
+	border-radius: 2;
+	padding: 3px 10px 3px 10px;
+
+}
+
+QComboBox:hover {
+	background:#9df;
+}
+
+QComboBox::down-arrow {
+      width: 5px;
+      height: 5px;
+      background: black;
+ }
+
+QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 15px;
+	 border-left: 1px solid black;
+ }
+
+QComboBox QAbstractItemView {
+     border: 1px solid black;
+     selection-background-color: black;
+     selection-color: white;
+ }
+
+QSpinBox {
+	border: 1px solid black;
+	border-radius: 2;
+	padding: 3px 10px 3px 10px;
+
+}
+
+ QSpinBox::up-button {
+     subcontrol-origin: border;
+     subcontrol-position: top right; 
+     width: 15px;
+     border-width: 1px;
+	 border-left: 1px solid black;
+ }
+
+QSpinBox::up-arrow {
+      width: 10px;
+      height: 10px;
+	image: url(:/triangle-up.png);
+ }
+
+
+ QSpinBox::down-button {
+     subcontrol-origin: border;
+     subcontrol-position: bottom right; 
+     width: 15px;
+     border-width: 1px;
+	 border-left: 1px solid black;
+ }
+
+QSpinBox::down-arrow {
+      width: 10px;
+      height: 10px;
+	image: url(:/triangle-down.png);
+ }
+
+
+QCheckBox {
+	border: none;
+	border-radius: 2;
+	padding: 3px 10px 3px 10px;
+}
+
+QCheckBox:hover {
+	background:#9df;
+}
+
+QCheckBox:checked {
+	background: black;
+	color: white;
+}
+
+QCheckBox::indicator {
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
+
+}
+
+QCheckBox::indicator:checked {
+	background:white;
+    border: 1px solid white;
+    width: 15px;
+    height: 15px;
+	image: url(:/checkbox.png);
+}
+
+QRadioButton {
+	border: none;
+	border-radius: 2;
+	padding: 3px 10px 3px 10px;
+}
+
+
+QRadioButton:hover {
+	background:#9df;
+}
+
+QRadioButton::indicator {
+    border: 2px solid black;
+    border-radius: 6px;
+    background: white;
+
+}
+
+QRadioButton::checked {
+	background: black;
+	color: white;
+
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid white;
+    border-radius: 6px;
+    background: black;
+}
+
+QLineEdit {
+	background: white;
+	color: black;
+	selection-color: white;
+	selection-background-color: black;
+}
+
+
+QTableView {
+	selection-color:black;
+	selection-background-color: #9df;
+	border: 1px solid black;
+}
+
+QListWidget {
+	selection-color:black;
+	selection-background-color: #9df;
+	border: 1px solid black;
+}
+
+
+QScrollBar:horizontal,  QScrollBar:vertical {   
+     background: gray;   
+}
+
+QHeaderView::section {
+    color:  light-gray;
+	border: 1px solid black;
+}
+
+QTabWidget::pane {
+     border-top: 1px solid black;
+ }
+
+QTabBar::tab {
+	border: 1px solid black;
+	border-bottom: 0px;
+	padding: 5px 15px 5px 15px;
+}
+
+QTabBar::tab:hover {
+     background: #9df;
+
+ }
+
+
+QTabBar::tab:selected {
+     background: black; 
+	color: white;
+}
+
+QMenuBar::item:selected {
+	background: #9df;
+
+}
+
+QMenuBar::item:pressed {
+    background: black;
+	color: white;
+
+}
+
+QMenu::item:selected {
+	background:#9df;
+}
+
+QLineEdit {
+	border: 1px solid black;
+	border-radius: 2;
+	padding: 5px 15px 5px 15px;
+}
+
+QLineEdit:hover {
+	border: 1px solid #9df; 
+                    
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page0">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="titleLayout">
+         <property name="spacing">
+          <number>15</number>
+         </property>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>103</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resources.qrc">:/resultarc.jpg</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>103</width>
+             <height>103</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resources.qrc">:/exchange.png</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>103</width>
+             <height>103</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="resources.qrc">:/traptaserver.png</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>TRAPTA Transfer permet d'échanger des données entre Résult'arc et TRAPTA. Il doit être installé sur le même PC que Résult'arc.
+
+Que voulez-vous faire avec la base de données de Result'arc ?</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_5" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="widget_4" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <item>
+              <widget class="QRadioButton" name="radioButton0">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="text">
+                <string> Extraire la liste des engagés pour les importer dans TRAPTA  </string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Cette opération est à faire avant chaque départ. Elle permet d'initialiser les tablettes avec les noms des archers.</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <property name="indent">
+                <number>30</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton1">
+               <property name="text">
+                <string> Mettre à jour les scores exportés par TRAPTA  </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Cette opération est à faire à la fin de chaque tir (départ). Elle vous permet d'injecter les scores exportés depuis TRAPTA dans Résult'arc. Cela vous évitera une saisie manuelle. Un simple contrôle visuel et comparaison avec les données des feuilles papier suffira.</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::PlainText</enum>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="indent">
+                <number>30</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page1">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="resources.qrc">:/resultarc.jpg</pixmap>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Quel est le chemin vers le répertoire de Result'arc ? (par défaut c:/resultarc)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="lineEditFFTA">
+            <property name="text">
+             <string>c:/resultarc</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="chooseDirButton">
+            <property name="text">
+             <string>  ...  </string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page2">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Veuillez sélectionner la compétition et le départ à extraire:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="competitionListWidget"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Quel départ ?</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="shootIdSpinner">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>29</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>15</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="abortButton">
+        <property name="text">
+         <string>    Fermer    </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="okButton">
+        <property name="text">
+         <string>      Suite &gt;      </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

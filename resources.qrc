@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>checkbox.png</file>
+        <file>triangle-down.png</file>
+        <file>triangle-up.png</file>
+        <file>FFTA.wdd</file>
+        <file>resultarc.jpg</file>
+        <file>exchange.png</file>
+        <file>traptaserver.png</file>
+    </qresource>
+</RCC>
