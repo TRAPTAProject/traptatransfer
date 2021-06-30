@@ -21,6 +21,6 @@ void SQLScript::run() {
     argList << _wddFilename << _filename;
     _process.setWorkingDirectory(workingPath);
     _process.start(QApplication::applicationDirPath()+"/SQLSelect/SQLScript.exe", argList);
-    _pid = _process.pid();
+    _pid = _process.processId();
 
 }

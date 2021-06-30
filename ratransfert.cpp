@@ -12,7 +12,7 @@ RATransfert::RATransfert(int operation, const QStringList &resultList, int start
     ui(new Ui::RATransfert)
 {
     ui->setupUi(this);
-    setWindowTitle("  TRAPTA Transfer 1.8");
+    setWindowTitle("  TRAPTA Transfer 1.10");
     setWindowFlags(Qt::Dialog|Qt::WindowCloseButtonHint);
     _resultList = resultList;
     ui->stackedWidget->setCurrentIndex(0);

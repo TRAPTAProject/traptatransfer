@@ -16,7 +16,7 @@ signals:
 
 private:
     QProcess _process;
-    Q_PID _pid;
+    qint64 _pid;
     QString _filename;
     QString _wddFilename;
 

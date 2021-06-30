@@ -55,6 +55,6 @@ bool WDRequest::sqlExec(const QString& request) {
     qDebug() << execPath << argList;
     _process.setWorkingDirectory(path);
     _process.start(execPath, argList);
-    _pid = _process.pid();
+    _pid = _process.processId();
 
 }

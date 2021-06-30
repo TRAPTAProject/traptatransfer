@@ -23,7 +23,7 @@ private:
 
     QString _wddFilename;
     QProcess _process;
-    Q_PID _pid;
+    qint64 _pid;
 
 
 };
