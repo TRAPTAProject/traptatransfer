@@ -1,46 +1,69 @@
+NumConnexion			est un entier
+SQLRequete				est une chaîne
+WDDFichier				est une chaîne
+ResultarcRepertoire		est une chaîne
+NomFichier				est une chaîne
+IdFichier				est un entier
+maChaine				est une chaîne
 
-NumConnexion est un entier
-SQLRequete est une chaîne
-WDDFichier est une chaîne
-NomFichier est une chaîne
-IdFichier est un entier
-ncolonnes est un entier
-maChaine est une chaîne
+WDDFichier			= LigneCommande(1)
+SQLRequete			= LigneCommande(2)
+NomFichier			= LigneCommande(3)
 
-WDDFichier = LigneCommande(1)
-SQLRequete = LigneCommande(2)
-NomFichier = LigneCommande(3)
+ResultarcRepertoire	= fRepParent(WDDFichier)
 
 
-IdFichier = fCrée(NomFichier)
+IdFichier			= fCrée(NomFichier)
 SI IdFichier = -1 ALORS
 	RENVOYER 100
 FIN
 
-NumConnexion = SQLConnecte(WDDFichier, "", "", "Hyper File")
-SI NumConnexion <> 0 ALORS
-	SI SQLExec(SQLRequete, "REQ1") = Vrai ALORS
-		SQLInfoGene("REQ1")
-		ncolonnes = SQL.NbCol
-		TANTQUE SQLAvance("REQ1") = 0 
-			maChaine = ""
-			POUR Indice = 1 A ncolonnes
-				maChaine = maChaine + SQLLitCol("REQ1", Indice)+";"
-			FIN
-			fEcritLigne(IdFichier, maChaine)
-		FIN
-	SINON
-		Erreur(ErreurInfo(errMessage))
-		RENVOYER 102
+// Ouverture de l'analyse
+SI PAS HOuvreAnalyse(WDDFichier)	ALORS
+	Erreur("Erreur d'ouverture de l'analyse " + HErreurInfo())
+	RETOUR 101
+FIN	
+
+// Optimisation de l'accès aux données en HFSQL Classic.
+HChangeLocalisation("*", hDisque)
+
+// Description de la connexion
+//VariableRAZ(cnxConnexion)
+cnxConnexion est une Connexion
+cnxConnexion.Serveur			= ResultarcRepertoire
+cnxConnexion.Provider			= hAccèsHF7
+cnxConnexion.Accès				= hOLectureEcriture
+// Ouverture de la connexion
+NumConnexion					= HOuvreConnexion(cnxConnexion)
+
+// Affectation de la connexion à tous les fichiers de données
+HChangeConnexion("*", cnxConnexion) 
+
+
+ReqClient est une Source de Données
+SI NumConnexion > 0 ALORS
+	
+	// Initialise la requête
+	SI PAS HExécuteRequêteSQL(ReqClient,hRequêteDéfaut, SQLRequete) ALORS
+		Erreur("Erreur d'initialisation de la requête" + RC + HErreurInfo())
+		RETOUR 101
 	FIN
 	
-	SQLFerme("REQ1")
+	POUR TOUT ReqClient 
+		maChaine = HEnregistrementVersChaîne(ReqClient, ";")
+		fEcritLigne(IdFichier, maChaine)
+	FIN
 	
 	
 SINON
 	
+	SQLInfoGene()
+	Erreur("La connexion à la source de données " + WDDFichier + " a échoué." + NumConnexion + "Code erreur : " + SQL.Erreur + RC + SQL.MesErreur)
+	Erreur(ErreurInfo(errMessage))
 	RENVOYER 101
 FIN
 
-SQLDéconnecte()
+HFerme("ConnexionHFLocale")
+
+
 RENVOYER 0
