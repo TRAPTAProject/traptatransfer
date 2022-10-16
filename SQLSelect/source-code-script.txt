@@ -1,44 +1,66 @@
-IDFichier est un entier
-LigneLue est une chaîne
-NumConnexion est un entier
-SQLFichier est une chaîne
-WDDFichier est une chaîne
-IndexLigne est un entier
+NumConnexion			est un entier
+SQLRequete				est une chaîne
+WDDFichier				est une chaîne
+ResultarcRepertoire		est une chaîne
+SQLFichier				est une chaîne
+IdFichier				est un entier
 
-WDDFichier = LigneCommande(1)
-SQLFichier = LigneCommande(2)
-
+WDDFichier			= LigneCommande(1)
+SQLFichier			= LigneCommande(2)
 
 SI WDDFichier = "" OU SQLFichier = "" ALORS
 	RENVOYER 100
 FIN
 
+ResultarcRepertoire	= fRepParent(WDDFichier)
 
-IDFichier = fOuvre(SQLFichier)
-SI IDFichier = -1 ALORS
-	RENVOYER 101
-SINON
+IdFichier = fOuvre(SQLFichier)
+SI IdFichier = -1 ALORS
+	RETOUR 101
+FIN
+
+// Ouverture de l'analyse
+SI PAS HOuvreAnalyse(WDDFichier)	ALORS
+	Erreur("Erreur d'ouverture de l'analyse " + HErreurInfo())
+	RETOUR 101
+FIN	
+
+// Optimisation de l'accès aux données en HFSQL Classic.
+HChangeLocalisation("*", hDisque)
+
+// Description de la connexion
+//VariableRAZ(cnxConnexion)
+cnxConnexion est une Connexion
+cnxConnexion.Serveur			= ResultarcRepertoire
+cnxConnexion.Provider			= hAccèsHF7
+cnxConnexion.Accès				= hOLectureEcriture
+// Ouverture de la connexion
+NumConnexion					= HOuvreConnexion(cnxConnexion)
+
+// Affectation de la connexion à tous les fichiers de données
+HChangeConnexion("*", cnxConnexion) 
+
+ReqClient est une Source de Données
+SI NumConnexion > 0 ALORS
 	
-	NumConnexion = SQLConnecte(WDDFichier, "", "", "Hyper File")
-	SI NumConnexion <> 0 ALORS
-		LigneLue = fLitLigne(IDFichier)
-		IndexLigne = 0
-		TANTQUE LigneLue <> EOT ET LigneLue <> ""
-			SI SQLExec(LigneLue, "REQ") = Vrai ALORS
-				
-			SINON
-				RENVOYER 110+IndexLigne
-				
-			FIN
-			LigneLue = fLitLigne(IDFichier)	
+	SQLRequete	= fLitLigne(IdFichier)
+	TANTQUE SQLRequete <> EOT ET SQLRequete <> ""
+		// Initialise la requête
+		SI PAS HExécuteRequêteSQL(ReqClient,hRequêteDéfaut, SQLRequete) ALORS
+			Erreur("Erreur requête " + RC + SQLRequete + RC + HErreurInfo())
 		FIN
-		
-		
-	SINON
-		
-		RENVOYER 102
+		SQLRequete = fLitLigne(IdFichier)	
 	FIN
 	
-	SQLDéconnecte()
-	RENVOYER 0
+SINON
+	
+	SQLInfoGene()
+	Erreur("La connexion à la source de données " + WDDFichier + " a échoué." + NumConnexion + "Code erreur : " + SQL.Erreur + RC + SQL.MesErreur)
+	Erreur(ErreurInfo(errMessage))
+	RENVOYER 101
 FIN
+
+HFerme("ConnexionHFLocale")
+
+RENVOYER 0
+
