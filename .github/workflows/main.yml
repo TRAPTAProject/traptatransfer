@@ -8,9 +8,7 @@ on:
 
 jobs:
   linux:
-
     runs-on: trapta/trapta-build:1.1.0
-
     steps:
     - uses: actions/checkout@v3
     - name: qmake
@@ -19,7 +17,6 @@ jobs:
       run: make
     - name: create installer
       run: make dist
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -32,7 +29,6 @@ jobs:
           New Trapta version
         draft: true
         prerelease: false
-
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
@@ -45,21 +41,21 @@ jobs:
         asset_content_type: application/zip
 
 
-  windows:
-
-    runs-on: windows-latest
-
-    steps:
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: '5.15.18'
-        host: 'windows'
-        target: 'desktop'
-        set-env: 'true'
-        tools: 'tools_ifw'
-    - uses: actions/checkout@v3
-    - name: qmake
-      run: qmake
-    - name: make
-      run: make
+#  windows:
+#
+#    runs-on: windows-latest
+#
+#    steps:
+#    - name: Install Qt
+#      uses: jurplel/install-qt-action@v3
+#      with:
+#        version: '5.15.18'
+#        host: 'windows'
+#        target: 'desktop'
+#        set-env: 'true'
+#        tools: 'tools_ifw'
+#    - uses: actions/checkout@v3
+#    - name: qmake
+#      run: qmake
+#    - name: make
+#      run: make
