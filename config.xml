@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>TRAPTA Transfer</Name>
+    <Version>1.0</Version>
+    <Title>TRAPTA Transfer</Title>
+    <Publisher>TRAPTA Project</Publisher>
+    <StartMenuDir>TRAPTA</StartMenuDir>
+    <TargetDir>@HomeDir@/trapte/traptatransfer</TargetDir>
+</Installer>

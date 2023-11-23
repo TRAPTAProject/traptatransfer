@@ -56,7 +56,7 @@ jobs:
     - name: Deployer
       working-directory: '${{ github.workspace }}'
       run:  |
-            qtenv2.bat && windeployqt ${{ github.workspace }}\bin\release\TRAPTATransfer.exe --no-opengl-sw --no-system-d3d-compiler --no-virtualkeyboard --no-compiler-runtime --no-translations --qmldir=${{ github.workspace }}/qml
+            qtenv2.bat && windeployqt ${{ github.workspace }}\bin\release\TRAPTATransfer.exe --no-opengl-sw --no-system-d3d-compiler --no-virtualkeyboard --no-compiler-runtime --no-translations
 
 
     - name: Generate installer
