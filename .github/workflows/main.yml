@@ -52,6 +52,7 @@ jobs:
       run:  |
             qmake -config release
             ${{ runner.temp }}\jom\jom
+            find .
 
     - name: Deployer
       working-directory: '${{ github.workspace }}'
