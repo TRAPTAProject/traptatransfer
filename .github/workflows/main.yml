@@ -1,0 +1,119 @@
+name: build release
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+
+  windows:
+    runs-on: windows-2019
+    defaults:
+      run:
+        shell: cmd
+    steps:
+    - name: Install Qtr
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '5.15.2'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        dir: '${{ runner.temp }}'
+        modules: 'qtquick3d'
+        tools: 'tools_ifw'
+        
+    - name: Clone repo
+      uses: actions/checkout@v3
+
+    - name: Download JOM
+      uses: suisei-cn/actions-download-file@v1
+      with:
+        url:    http://download.qt.io/official_releases/jom/jom.zip
+        target: ${{ runner.temp }}\
+
+    - name: Unzip JOM
+      working-directory: ${{ runner.temp }}
+      run:  |
+            7z x jom.zip -ojom
+  
+              
+    - name: Create build directory
+      run:  mkdir ${{ github.workspace }}\build
+
+    - name: Set up Visual Studio shell
+      uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
+
+    - name: Build
+      working-directory: '${{ github.workspace }}'
+      run:  |
+            qmake -config release
+            ${{ runner.temp }}\jom\jom
+
+    - name: Deployer
+      working-directory: '${{ github.workspace }}'
+      run:  |
+            qtenv2.bat && windeployqt ${{ github.workspace }}\bin\release\TRAPTATransfer.exe --no-opengl-sw --no-system-d3d-compiler --no-virtualkeyboard --no-compiler-runtime --no-translations --qmldir=${{ github.workspace }}/qml
+
+
+    - name: Generate installer
+      working-directory: ${{ github.workspace }}
+      run:  |
+            copy package.xml ${{ github.workspace }}\bin\release\
+            echo "ls ${{ github.workspace }}\bin\release"
+            ls ${{ github.workspace }}\bin\release
+            echo "ls ${{ github.workspace }}\bin\release\bearer"
+            ls ${{ github.workspace }}\bin\release\bearer
+            ${{ runner.temp }}\Qt\Tools\QtInstallerFramework\4.5\bin\binarycreator.exe --offline-only -c config.xml -p ${{ github.workspace }}\bin\release ${{ github.workspace }}\bin\release\TRAPTATransfer.exe
+            ls
+
+    
+
+    - name: Zip build
+      working-directory: ${{ runner.temp }}
+      run:  |
+            7z a trapta-transfert-build.zip ${{ github.workspace }}\bin\release\* -r
+
+              
+    - name: Save build artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: trapta-transfert.zip
+        path: ${{ runner.temp }}\trapta-transfert-build.zip
+
+  release:
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        shell: bash
+    needs: [ windows]
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          New Trapta Transfert version
+        draft: true
+        prerelease: false
+
+    
+    - name: Download all workflow run artifacts
+      uses: actions/download-artifact@v3
+
+    - name: Upload Windows Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: trapta-transfert.zip/trapta-transfert-build.zip
+        asset_name: trapta-transfert-win.zip
+        asset_content_type: application/zip
