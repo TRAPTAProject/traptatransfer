@@ -1,16 +1,18 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2013-11-23T13:54:40
-#
-#-------------------------------------------------
-
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 TARGET = TRAPTATransfer
 TEMPLATE = app
 
+QT       += core gui widgets
+CONFIG += c++11
+CONFIG += release
+
+debug {
+    DESTDIR = bin/debug
+    OBJECTS_DIR = build/lib/debug
+}
+release {
+    DESTDIR = bin/release
+    OBJECTS_DIR = build/lib/release
+}
 
 SOURCES += main.cpp\
         ratransfert.cpp \

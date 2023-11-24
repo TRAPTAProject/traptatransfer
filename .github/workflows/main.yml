@@ -52,7 +52,7 @@ jobs:
       run:  |
             qmake -config release
             ${{ runner.temp }}\jom\jom
-            find .
+            dir /s /b ${{ github.workspace }}
 
     - name: Deployer
       working-directory: '${{ github.workspace }}'
@@ -85,13 +85,6 @@ jobs:
         name: trapta-transfert.zip
         path: ${{ runner.temp }}\trapta-transfert-build.zip
 
-  release:
-    runs-on: ubuntu-18.04
-    defaults:
-      run:
-        shell: bash
-    needs: [ windows]
-    steps:
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
